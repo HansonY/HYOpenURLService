@@ -1,11 +1,18 @@
  # HYOpenURLService
 定义一套原生交互的协议iOS URL ，方便原始与原始组件化，也方便Web页面与原生无缝交互；<br/>
+
+协议类型://指令类型/指令?参数1=值1&参数2=值2；
+
+local://view/   打开页面或传值类型   <br/>  
+local://block/" 执行block或传值类型  <br/>
+
 ### 提供了两种类型注册
 #### 1.页面注册
     页面ViewController 注册 , 传入Key名，对应页面Class类名;<br/>
   
     [HYOpenURLService regViewCmdForKey:@"key名" withClassName:@"类名"];
-    
+    [HYOpenURLService regViewCmdForKey:Hanson_WebViewDialog withClassName:@"HYMyWebViewController"];
+
 #### 2.block 注册
 ##### 传入参数 "dic" 可以在 block "param"  被调用，可设定返回值；
 
@@ -28,11 +35,32 @@
                                 return nil;
                                 }
 
-    
+### URL方式，接口请求方式 调用
+
+
+
+#### 页面调用
+
+        [ [ AppDelegate shared ].commandService openURL: [HYOpenURLService cmd_URL_View:Hanson_WebViewDialog]  ];
+
+#### block调用
+        //不传参URL
+        
+         [ [ AppDelegate shared ].commandService openURL: [HYOpenURLService cmd_URL_Block:Hanson_Block_Alert] ];
+         //不攒餐
+         //  URL 方式打开；
+         NSString *urlCommand = [NSString stringWithFormat:@"%@?%@",Hanson_Block_Alert,@"title=酸辣粉"];
+         [ [ AppDelegate shared ].commandService openURL: [HYOpenURLService cmd_URL_Block:urlCommand]  ];
+         //  接口方式 打开;
+         [ [ AppDelegate shared ].commandService  openURL: [HYOpenURLService cmd_URL_Block:Hanson_Block_Alert]
+                                                  withParam:@{@"title":@"酸辣粉2222"} ];
+
 
  
 ## API 说明
+
 初始化   <br/>
+
 
     ViewController * VC = [[ViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:VC];
