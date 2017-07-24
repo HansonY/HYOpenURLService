@@ -45,14 +45,14 @@ local://block/" 执行block或传值类型  <br/>
 
           [HYOpenURLService cmd_URL_View:@"Hanson_WebViewDialog"]   URL 为：local://block/Hanson_WebViewDialog
 
-          [[ AppDelegate shared ].commandService openURL: [HYOpenURLService cmd_URL_View:@"Hanson_WebViewDialog"]];
+          [[HYOpenURLService Shared] openURL: [HYOpenURLService cmd_URL_View:@"Hanson_WebViewDialog"]];
 
-          [[ AppDelegate shared ].commandService openURL:[HYOpenURLService cmd_URL_View:@"Hanson_WebViewDialog"] 
+          [[HYOpenURLService Shared] openURL:[HYOpenURLService cmd_URL_View:@"Hanson_WebViewDialog"] 
                                                 withParam:@{@"isLoadLocal":@"YES"}];
           //  URL 打开                                     
           NSString *cmd = [NSString stringWithFormat:@"%@?%@",[HYOpenURLService cmd_URL_View:Hanson_WebViewDialog] ,@"isLoadLocal=YES"];
           //即 cmd = local://block/Hanson_WebViewDialog?isLoadLocal=YES;
-          [[ AppDelegate shared ].commandService openURL:cmd ];
+          [[HYOpenURLService Shared] openURL:cmd ];
 
 
 #### block调用
@@ -61,16 +61,16 @@ local://block/" 执行block或传值类型  <br/>
          
           [ HYOpenURLService cmd_URL_Block:@"Hanson_Block_Alert" ]  URL 为：local://block/Hanson_Block_Alert
 
-          [[ AppDelegate shared ].commandService openURL: [HYOpenURLService cmd_URL_Block:Hanson_Block_Alert ]];
+          [[HYOpenURLService Shared] openURL: [HYOpenURLService cmd_URL_Block:Hanson_Block_Alert ]];
 
           //  接口方式 打开;
-          [[ AppDelegate shared ].commandService openURL: [ HYOpenURLService cmd_URL_Block: @"Hanson_Block_Alert" ]
+          [[HYOpenURLService Shared] openURL: [ HYOpenURLService cmd_URL_Block: @"Hanson_Block_Alert" ]
                                                  withParam: @{@"title":@"酸辣粉2222"} ];
 
           //  URL 打开； 
           NSString *urlCommand = [NSString stringWithFormat:@"%@?%@",@"Hanson_Block_Alert",@"title=酸辣粉"];
           //即 cmd = local://block/Hanson_Block_Alert?title=酸辣粉;
-          [[ AppDelegate shared ].commandService openURL: [ HYOpenURLService cmd_URL_Block: urlCommand ]];
+          [[HYOpenURLService Shared] openURL: [ HYOpenURLService cmd_URL_Block: urlCommand ]];
 
  
 ## 使用初始化
