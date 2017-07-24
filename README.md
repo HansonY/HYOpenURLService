@@ -32,9 +32,10 @@ local://block/" 执行block或传值类型  <br/>
 
     [HYOpenURLService addBlockMappingKey:@"Hanson_Block_Alert"
                                 completion:^id(NSDictionary *param) {
-                                // 自定义;
-                                return nil;
-                                }
+
+                                 // 自定义;
+                                 return nil;
+                                 }
 
 ### 页面，block 调用方式：
 #### URL:   方式打开 可兼容 Web 页面调用；<br/>
