@@ -73,18 +73,18 @@ local://block/" 执行block或传值类型  <br/>
           [[ AppDelegate shared ].commandService openURL: [ HYOpenURLService cmd_URL_Block: urlCommand ]];
 
  
-## API 说明
+## 使用初始化
+#### 初始化 建议 nav = 赋值全局UINavigationController ；
 
-初始化   <br/>
+     ViewController * VC = [[ViewController alloc]init];
+     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:VC];
+     self.window.rootViewController = nav;
+    
+     [HYOpenURLService Shared].nav = nav;
+    
+  
+    
 
-
-    ViewController * VC = [[ViewController alloc]init];
-    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:VC];
-    self.window.rootViewController = nav;
-    [HYOpenURLService Shared].nav = nav;
-
-
-    [HYOpenURLService regViewCmdForKey:Hanson_WebViewDialog withClassName:@"HYMyWebViewController"];
-
+ 
 
 
