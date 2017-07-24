@@ -3,7 +3,7 @@
 
 协议类型://指令类型/指令?参数1=值1&参数2=值2；
 
-local://view/   打开页面或传值类型   <br/>  
+local://view/   打开页面或传值类型    <br/>
 local://block/" 执行block或传值类型  <br/>
 
 ### 提供了两种类型注册
@@ -11,14 +11,14 @@ local://block/" 执行block或传值类型  <br/>
     页面ViewController 注册 , 传入Key名，对应页面Class类名;<br/>
   
     [HYOpenURLService regViewCmdForKey:@"key名" withClassName:@"类名"];
-    [HYOpenURLService regViewCmdForKey:Hanson_WebViewDialog withClassName:@"HYMyWebViewController"];
+    [HYOpenURLService regViewCmdForKey:@"Hanson_WebViewDialog" withClassName:@"HYMyWebViewController"];
 
 #### 2.block 注册
 ##### 传入参数 "dic" 可以在 block "param"  被调用，可设定返回值；
 
       NSDictionary *dic = @{  @"title":@"good good study day day up" };
 
-      [HYOpenURLService addBlockMappingKey:Hanson_Block_Alert
+      [HYOpenURLService addBlockMappingKey:@"Hanson_Block_Alert"
                                  withParam:dic 
                                  completion:^id(NSDictionary *param) {
                                  
@@ -30,30 +30,41 @@ local://block/" 执行block或传值类型  <br/>
                                  
 ##### 不传参 方法
 
-    [HYOpenURLService addBlockMappingKey:Hanson_Block_Alert
+    [HYOpenURLService addBlockMappingKey:@"Hanson_Block_Alert"
                                 completion:^id(NSDictionary *param) {
                                 return nil;
                                 }
 
-### URL方式，接口请求方式 调用
+### 页面，block 调用方式：
 
 
 
-#### 页面调用
+#### 页面调用 
 
-        [ [ AppDelegate shared ].commandService openURL: [HYOpenURLService cmd_URL_View:Hanson_WebViewDialog]  ];
+        [HYOpenURLService cmd_URL_View:@"Hanson_WebViewDialog"]  为：local://block/Hanson_WebViewDialog
 
-#### block调用
-        //不传参URL
-        
-         [ [ AppDelegate shared ].commandService openURL: [HYOpenURLService cmd_URL_Block:Hanson_Block_Alert] ];
-         //不攒餐
-         //  URL 方式打开；
-         NSString *urlCommand = [NSString stringWithFormat:@"%@?%@",Hanson_Block_Alert,@"title=酸辣粉"];
-         [ [ AppDelegate shared ].commandService openURL: [HYOpenURLService cmd_URL_Block:urlCommand]  ];
+        [[ AppDelegate shared ].commandService openURL: [HYOpenURLService cmd_URL_View:@"Hanson_WebViewDialog"]  ];
+         //  URL 打开； local://block/Hanson_WebViewDialog?title=酸辣粉;
+        NSString *cmd = [NSString stringWithFormat:@"%@?%@",[HYOpenURLService cmd_URL_View:Hanson_WebViewDialog] ,@"isLoadLocal=YES"];
+        [[ AppDelegate shared ].commandService openURL:cmd ];
+
+        [[ AppDelegate shared ].commandService openURL:[HYOpenURLService cmd_URL_View:@"Hanson_WebViewDialog"] 
+                                              withParam:@{@"isLoadLocal":@"YES"}];
+
+
+#### block调用，若传值按新传参数 执行block，未传参数默认注册时的参数；
+
+         
+         [ HYOpenURLService cmd_URL_Block:@"Hanson_Block_Alert" ]  为：local://block/Hanson_Block_Alert
+        
+         [[ AppDelegate shared ].commandService openURL: [HYOpenURLService cmd_URL_Block:Hanson_Block_Alert ]];
+
+         //  URL 打开； local://block/Hanson_Block_Alert?title=酸辣粉;
+         NSString *urlCommand = [NSString stringWithFormat:@"%@?%@",@"Hanson_Block_Alert",@"title=酸辣粉"];
+         [[ AppDelegate shared ].commandService openURL: [ HYOpenURLService cmd_URL_Block: urlCommand ]];
          //  接口方式 打开;
-         [ [ AppDelegate shared ].commandService  openURL: [HYOpenURLService cmd_URL_Block:Hanson_Block_Alert]
-                                                  withParam:@{@"title":@"酸辣粉2222"} ];
+         [[ AppDelegate shared ].commandService openURL: [ HYOpenURLService cmd_URL_Block: @"Hanson_Block_Alert" ]
+                                                withParam: @{@"title":@"酸辣粉2222"} ];
 
 
  
